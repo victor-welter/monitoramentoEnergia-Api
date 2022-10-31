@@ -24,7 +24,6 @@ public class MonitoramentoController {
         return repository.findAll();
     }
 
-    // http://localhost:8080/monitoramento/salvaMonitoramento?codigo=1&voltagem=220&amperagem=10&resistencia=22
     @GetMapping("/salvaMonitoramento")
     public void save(@RequestParam Integer codigo, @RequestParam double voltagem, @RequestParam double amperagem,
             @RequestParam double resistencia) {
@@ -35,7 +34,7 @@ public class MonitoramentoController {
         double custo = ((((voltagem * amperagem) / 1000) * 60) * tarifa);
 
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter houorFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         m.setCusto(custo);
