@@ -43,6 +43,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependency>
+		<groupId>org.glassfish.jersey.bundles</groupId>
+		<artifactId>jaxrs-ri</artifactId>
+		<version>2.26</version>
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish.jersey.core</groupId>
+		<artifactId>jersey-server</artifactId>
+		<version>2.26</version>
+	</dependency>
 
 	<build>
 		<plugins>

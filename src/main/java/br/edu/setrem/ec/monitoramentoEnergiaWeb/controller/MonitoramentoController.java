@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,14 @@ public class MonitoramentoController {
     private MonitoramentoRepository repository;
 
     @GetMapping("/buscaMonitoramento")
-    public List<Monitoramento> listar() {
-        return repository.findAll();
+    public ResponseEntity<List<Monitoramento>> listar() {
+        List<Monitoramento> list = repository.findAll();
+
+        if (!list.isEmpty()) {
+            return ResponseEntity.ok(list);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/salvaMonitoramento")
@@ -31,7 +38,7 @@ public class MonitoramentoController {
 
         double tarifa = 0.630;
 
-        double custo = ((((voltagem * amperagem) / 1000) * 60) * tarifa);
+        double custo = (((((voltagem * amperagem) / 1000) * 60) * tarifa) / 4);
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
